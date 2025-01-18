@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To My Love</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop>
+        <source src="assets/music/background.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 音乐控制按钮 -->
+    <div class="music-control">
+        <button id="musicToggle">♫</button>
+    </div>
+
+    <!-- 主要内容区 -->
+    <div class="container">
+        <div class="love-text">
+            <h1>亲爱的宝贝</h1>
+            <div class="message">
+                <p>在一起的第21天</p>
+                <p>每一天都很特别</p>
+                <p>因为有你在身边</p>
+            </div>
+        </div>
+
+        <div class="love-days">
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+                <div class="day-count">Day <span id="currentDay">0</span>/21</div>
+            </div>
+            <div class="milestone-text">我们已经在一起 <span id="daysLeft">0</span> 天啦</div>
+        </div>
+
+        <div class="daily-message">
+            <h3>今日的甜蜜时刻</h3>
+            <p id="dailyText"></p>
+        </div>
+    </div>
+
+    <div class="photo-wall">
+        <div class="photo-frame" style="top: 5%; left: 5%;">
+            <img src="assets/images/bj1.jpg" alt="照片1">
+        </div>
+        <div class="photo-frame" style="top: 15%; left: 75%;">
+            <img src="assets/images/bj2.jpg" alt="照片2">
+        </div>
+        <div class="photo-frame" style="top: 45%; left: 85%;">
+            <img src="assets/images/bj3.jpg" alt="照片3">
+        </div>
+        <div class="photo-frame" style="top: 65%; left: 70%;">
+            <img src="assets/images/bj4.jpg" alt="照片4">
+        </div>
+        <div class="photo-frame" style="top: 35%; left: 5%;">
+            <img src="assets/images/bj5.jpg" alt="照片5">
+        </div>
+        <div class="photo-frame" style="top: 55%; left: 15%;">
+            <img src="assets/images/bj6.jpg" alt="照片6">
+        </div>
+        <div class="photo-frame" style="top: 75%; left: 25%;">
+            <img src="assets/images/bj7.jpg" alt="照片7">
+        </div>
+        <div class="photo-frame" style="top: 25%; left: 45%;">
+            <img src="assets/images/bj8.jpg" alt="照片8">
+        </div>
+        <div class="photo-frame" style="top: 85%; left: 45%;">
+            <img src="assets/images/bj9.jpg" alt="照片9">
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 
