@@ -3,8 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 获取DOM元素
     const bgMusic = document.getElementById('bgMusic');
     const musicToggle = document.getElementById('musicToggle');
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn = document.getElementById('noBtn');cd /c/Users/Administrator/Desktop/奇怪东西/aihao
+    const daysLeft = document.getElementById('daysLeft');
 
     // 音乐控制
     let isMusicPlaying = false;
@@ -19,25 +18,25 @@ document.addEventListener('DOMContentLoaded', function() {
         isMusicPlaying = !isMusicPlaying;
     });
 
-    // "好呀"按钮点击事件
-    yesBtn.addEventListener('click', function() {
-        if (!localStorage.getItem('loveStartDate')) {
-            localStorage.setItem('loveStartDate', new Date().toISOString());
-            initializeLoveDays();
-        }
-        alert('我就知道你也喜欢我 ❤\n让我们开始21天的恋爱之旅吧！');
-        createHearts();
-        document.querySelector('.daily-message').style.display = 'block';
-    });
+    // 设置固定的开始日期
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - 21); // 设置为21天前
+    localStorage.setItem('loveStartDate', startDate.toISOString());
 
-    // "考虑考虑"按钮事件 - 按钮会逃跑
-    noBtn.addEventListener('mouseover', function() {
-        const x = Math.random() * (window.innerWidth - this.offsetWidth);
-        const y = Math.random() * (window.innerHeight - this.offsetHeight);
-        this.style.position = 'absolute';
-        this.style.left = `${x}px`;
-        this.style.top = `${y}px`;
-    });
+    // 更新天数显示
+    function updateDays() {
+        const currentDate = new Date();
+        const daysPassed = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+        daysLeft.textContent = '21';
+        
+        // 更新进度条
+        document.querySelector('.progress-bar').style.width = '100%';
+
+        // 显示每日消息
+        const dailyMessage = document.querySelector('.daily-message');
+        dailyMessage.style.display = 'block';
+        document.getElementById('dailyText').textContent = dailyMessages[20]; // 显示最后一天的消息
+    }
 
     // 创建心形特效
     function createHearts() {
@@ -75,10 +74,12 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     img.src = 'assets/images/bg.jpg';
 
+    // 初始化
+    updateDays();
+    createHearts();
     initializePhotoWall();
-    initializeLoveDays();
-
-    // 启动心形飘落效果
+    
+    // 自动启动心形飘落效果
     createFloatingHearts();
 });
 
@@ -142,7 +143,7 @@ const dailyMessages = [
     "公园散步，数星星",
     "送你回家的路上，舍不得分开",
     "一起看星星，许下愿望",
-    "分享童年趣事，了解对方的过去",
+    "分享彼此的过去",
     "为你做的第一顿饭",
     "规划第一次旅行",
     "一起逛街，你试衣服的样子真可爱",
@@ -157,33 +158,6 @@ const dailyMessages = [
     "一起学做甜点",
     "憧憬美好的未来"
 ];
-
-function initializeLoveDays() {
-    const startDate = new Date(localStorage.getItem('loveStartDate') || new Date());
-    if (!localStorage.getItem('loveStartDate')) {
-        localStorage.setItem('loveStartDate', startDate.toISOString());
-    }
-
-    function updateDays() {
-        const currentDate = new Date();
-        const daysPassed = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
-        
-        document.getElementById('currentDay').textContent = Math.min(daysPassed, 21);
-        document.getElementById('daysLeft').textContent = daysPassed;
-        
-        // 更新进度条
-        const progress = (Math.min(daysPassed, 21) / 21) * 100;
-        document.querySelector('.progress-bar').style.width = `${progress}%`;
-
-        // 显示每日消息
-        const dailyMessage = document.querySelector('.daily-message');
-        dailyMessage.style.display = 'block';
-        document.getElementById('dailyText').textContent = dailyMessages[Math.min(daysPassed, 20)];
-    }
-
-    updateDays();
-    setInterval(updateDays, 1000 * 60); // 每分钟更新一次
-}
 
 // 添加随机心形飘落效果
 function createFloatingHearts() {
